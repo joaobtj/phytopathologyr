@@ -12,24 +12,22 @@
 #' @importFrom magrittr %>%
 #' @importFrom stats lm
 #'
-#' @export
-#'
 #' @examples
 #' dap <- seq(1, 70, 10)
 #' inc <- c(0.01, 0.04, 0.05, 0.11, 0.30, 0.55, 0.94)
-
 #' expon(y=inc, time=dap)
 
 
+#' @export
 expon <- function(y, time) {
 
   exponit <- log(y) #transforma a variável
-  expon <- lm(exponit ~ time)
-  r <- expon$coefficients[2] %>% unname()
-  exponit0 <- expon$coefficients[1] %>% unname()
+  fit.expon <- lm(exponit ~ time)
+  r <- fit.expon$coefficients[2] %>% unname()
+  exponit0 <- fit.expon$coefficients[1] %>% unname()
   y0 <- exp(exponit0)
   prev <-
-    exp(expon$fitted.values)  #previstos destransformados
+    exp(fit.expon$fitted.values)  #previstos destransformados
   r2 <- summary(lm(prev ~ y))$r.squared #ver o coeficiente R2
 
   return(list(
@@ -39,6 +37,7 @@ expon <- function(y, time) {
     prev = unname(prev),
     r2 = r2
   ))
+
 }
 
 

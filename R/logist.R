@@ -12,23 +12,22 @@
 #' @importFrom magrittr %>%
 #' @importFrom stats lm
 #'
-#' @export
-#'
 #' @examples
 #' dap <- seq(1, 70, 10)
 #' inc <- c(0.01, 0.04, 0.15, 0.31, 0.65, 0.88, 0.94)
 #' logist(y=inc, time=dap)
 
 
+#' @export
 logist <- function(y, time) {
 
   logit <- log(y / (1 - y)) #transforma a variável
-  logist <- lm(logit ~ time)
-  r <- logist$coefficients[2] %>% unname()
-  logit0 <- logist$coefficients[1]
+  fit.logist <- lm(logit ~ time)
+  r <- fit.logist$coefficients[2] %>% unname()
+  logit0 <- fit.logist$coefficients[1]
   y0 <- (exp(logit0) / (1 + exp(logit0)))  %>% unname()
   prev <-
-    exp(logist$fitted.values) / (1 + exp(logist$fitted.values)) #previstos destransformados
+    exp(fit.logist$fitted.values) / (1 + exp(fit.logist$fitted.values)) #previstos destransformados
   r2 <- summary(lm(prev ~ y))$r.squared #ver o coeficiente R2
 
   return(list(
@@ -38,6 +37,7 @@ logist <- function(y, time) {
     prev = unname(prev),
     r2 = r2
   ))
+
 }
 
 

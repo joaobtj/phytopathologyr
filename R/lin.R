@@ -12,20 +12,19 @@
 #' @importFrom magrittr %>%
 #' @importFrom stats lm
 #'
-#' @export
-#'
 #' @examples
 #' dap <- seq(10, 60, 10)
 #' inc <- c(0.18, 0.30, 0.40, 0.60, 0.90, 0.98)
 #' lin(y = inc , time = dap)
 
 
+#' @export
 lin <- function(y, time) {
 
-  lin <- lm(y ~ time)
-  r <- lin$coefficients[2] %>% unname()
-  y0 <- lin$coefficients[1] %>% unname()
-  prev <- lin$fitted.values  #previstos destransformados
+  fit.lin <- lm(y ~ time)
+  r <- fit.lin$coefficients[2] %>% unname()
+  y0 <- fit.lin$coefficients[1] %>% unname()
+  prev <- fit.lin$fitted.values  #previstos destransformados
   r2 <- summary(lm(prev ~ y))$r.squared #ver o coeficiente R2
 
   return(list(
@@ -35,4 +34,5 @@ lin <- function(y, time) {
     prev = unname(prev),
     r2 = r2
   ))
+
 }
