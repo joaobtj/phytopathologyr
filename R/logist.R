@@ -6,7 +6,7 @@
 #' @return r Growth rate
 #' @return y0 Initial inoculum
 #' @return time Measurement time
-#' @return prev Predicted data
+#' @return pred Predicted data
 #' @return r2 Determination coefficient between the observed and predicted data
 #'
 #' @importFrom magrittr %>%
@@ -26,15 +26,15 @@ logist <- function(y, time) {
   r <- fit.logist$coefficients[2] %>% unname()
   logit0 <- fit.logist$coefficients[1]
   y0 <- (exp(logit0) / (1 + exp(logit0)))  %>% unname()
-  prev <-
+  pred <-
     exp(fit.logist$fitted.values) / (1 + exp(fit.logist$fitted.values)) #previstos destransformados
-  r2 <- summary(lm(prev ~ y))$r.squared #ver o coeficiente R2
+  r2 <- summary(lm(pred ~ y))$r.squared #ver o coeficiente R2
 
   return(list(
     r = r,
     y0 = y0,
     time = time,
-    prev = unname(prev),
+    pred = unname(pred),
     r2 = r2
   ))
 

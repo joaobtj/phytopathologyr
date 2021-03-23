@@ -18,7 +18,7 @@ y0 Initial inoculum
 
 time Measurement time
 
-prev Predicted data
+pred Predicted data
 
 r2 Determination coefficient between the observed and predicted data
 }

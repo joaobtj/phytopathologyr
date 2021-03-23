@@ -6,7 +6,7 @@
 #' @return r Growth rate
 #' @return y0 Initial inoculum
 #' @return time Measurement time
-#' @return prev Predicted data
+#' @return pred Predicted data
 #' @return r2 Determination coefficient between the observed and predicted data
 #'
 #' @importFrom magrittr %>%
@@ -26,15 +26,15 @@ monom <- function(y, time) {
   r <- fit.monom$coefficients[2] %>% unname()
   monit0 <- fit.monom$coefficients[1] %>% unname()
   y0 = (1 - 1 / exp(monit0))
-  prev <-
+  pred <-
     (1 - 1 / exp(fit.monom$fitted.values))  #previstos destransformados
-  r2 <- summary(lm(prev ~ y))$r.squared #ver o coeficiente R2
+  r2 <- summary(lm(pred ~ y))$r.squared #ver o coeficiente R2
 
   return(list(
     r = r,
     y0 = y0,
     time = time,
-    prev = unname(prev),
+    pred = unname(pred),
     r2 = r2
   ))
 
