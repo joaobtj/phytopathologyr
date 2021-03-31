@@ -15,19 +15,16 @@
 #' @examples
 #' dap <- seq(10, 60, 10)
 #' inc <- c(0.18, 0.30, 0.40, 0.60, 0.90, 0.98)
-#' lin(y = inc , time = dap)
-
-
+#' lin(y = inc, time = dap)
 #' @export
 lin <- function(y, time) {
-
   fit.lin <- lm(y ~ time)
   r <- fit.lin$coefficients[2] %>% unname()
   y0 <- fit.lin$coefficients[1] %>% unname()
-  pred <- fit.lin$fitted.values  #previstos destransformados
-  r2 <- summary(lm(pred ~ y))$r.squared #ver o coeficiente R2
+  pred <- fit.lin$fitted.values # previstos destransformados
+  r2 <- summary(lm(pred ~ y))$r.squared # ver o coeficiente R2
 
-  return(list(
+  r <- (list(
     r = r,
     y0 = y0,
     time = time,
@@ -35,4 +32,8 @@ lin <- function(y, time) {
     r2 = r2
   ))
 
+  class(r) <- "model"
+
+
+  return(r)
 }

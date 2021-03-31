@@ -15,22 +15,19 @@
 #' @examples
 #' dap <- seq(1, 70, 10)
 #' inc <- c(0.01, 0.04, 0.05, 0.11, 0.30, 0.55, 0.94)
-#' expon(y=inc, time=dap)
-
-
+#' expon(y = inc, time = dap)
 #' @export
 expon <- function(y, time) {
-
-  exponit <- log(y) #transforma a variável
+  exponit <- log(y) # transforma a variável
   fit.expon <- lm(exponit ~ time)
   r <- fit.expon$coefficients[2] %>% unname()
   exponit0 <- fit.expon$coefficients[1] %>% unname()
   y0 <- exp(exponit0)
   pred <-
-    exp(fit.expon$fitted.values)  #previstos destransformados
-  r2 <- summary(lm(pred ~ y))$r.squared #ver o coeficiente R2
+    exp(fit.expon$fitted.values) # previstos destransformados
+  r2 <- summary(lm(pred ~ y))$r.squared # ver o coeficiente R2
 
-  return(list(
+  r <- (list(
     r = r,
     y0 = y0,
     time = time,
@@ -38,8 +35,8 @@ expon <- function(y, time) {
     r2 = r2
   ))
 
+  class(r) <- "model"
+
+
+  return(r)
 }
-
-
-
-

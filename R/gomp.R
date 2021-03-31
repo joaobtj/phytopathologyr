@@ -15,22 +15,19 @@
 #' @examples
 #' dap <- seq(1, 70, 10)
 #' inc <- c(0.01, 0.14, 0.40, 0.65, 0.88, 0.96, 0.98)
-#' gomp(y=inc, time=dap)
-
-
+#' gomp(y = inc, time = dap)
 #' @export
 gomp <- function(y, time) {
-
-  gompit <- -log(-log(y)) #transforma a variável
+  gompit <- -log(-log(y)) # transforma a variável
   fit.gomp <- lm(gompit ~ time)
   r <- fit.gomp$coefficients[2] %>% unname()
   gompit0 <- fit.gomp$coefficients[1] %>% unname()
   y0 <- exp(-exp(-gompit0))
   pred <-
-    exp(-exp(-fit.gomp$fitted.values))  #previstos destransformados
-  r2 <- summary(lm(pred ~ y))$r.squared #ver o coeficiente R2
+    exp(-exp(-fit.gomp$fitted.values)) # previstos destransformados
+  r2 <- summary(lm(pred ~ y))$r.squared # ver o coeficiente R2
 
-  return(list(
+  r <- (list(
     r = r,
     y0 = y0,
     time = time,
@@ -38,4 +35,8 @@ gomp <- function(y, time) {
     r2 = r2
   ))
 
+  class(r) <- "model"
+
+
+  return(r)
 }

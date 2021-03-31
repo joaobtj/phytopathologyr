@@ -15,22 +15,19 @@
 #' @examples
 #' dap <- seq(1, 70, 10)
 #' inc <- c(0.01, 0.04, 0.15, 0.31, 0.65, 0.88, 0.94)
-#' logist(y=inc, time=dap)
-
-
+#' logist(y = inc, time = dap)
 #' @export
 logist <- function(y, time) {
-
-  logit <- log(y / (1 - y)) #transforma a variável
+  logit <- log(y / (1 - y)) # transforma a variável
   fit.logist <- lm(logit ~ time)
   r <- fit.logist$coefficients[2] %>% unname()
   logit0 <- fit.logist$coefficients[1]
-  y0 <- (exp(logit0) / (1 + exp(logit0)))  %>% unname()
+  y0 <- (exp(logit0) / (1 + exp(logit0))) %>% unname()
   pred <-
-    exp(fit.logist$fitted.values) / (1 + exp(fit.logist$fitted.values)) #previstos destransformados
-  r2 <- summary(lm(pred ~ y))$r.squared #ver o coeficiente R2
+    exp(fit.logist$fitted.values) / (1 + exp(fit.logist$fitted.values)) # previstos destransformados
+  r2 <- summary(lm(pred ~ y))$r.squared # ver o coeficiente R2
 
-  return(list(
+  r <- (list(
     r = r,
     y0 = y0,
     time = time,
@@ -38,8 +35,8 @@ logist <- function(y, time) {
     r2 = r2
   ))
 
+  class(r) <- "model"
+
+
+  return(r)
 }
-
-
-
-

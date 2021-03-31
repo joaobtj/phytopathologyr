@@ -14,11 +14,10 @@
 #' @importFrom dplyr summarise
 #'
 #' @examples
-#' time=dap <- seq(10, 60, 10)
-#' y=inc <- c(0.18, 0.56, 0.82, 0.91, 0.96, 0.98)
-#' fit <- fit_models(y=inc, time=dap)
+#' time <- dap <- seq(10, 60, 10)
+#' y <- inc <- c(0.18, 0.56, 0.82, 0.91, 0.96, 0.98)
+#' fit <- fit_models(y = inc, time = dap)
 #' fit
-
 #' @export
 fit_models <- function(y, time) {
   f <- data.frame(y, time) %>% summarise(
@@ -29,8 +28,10 @@ fit_models <- function(y, time) {
     gompertz = gomp(y, time)
   )
 
-  #order of models by highest r2
-  ord <- map(f, "r2") %>% unlist() %>% order(decreasing = TRUE)
+  # order of models by highest r2
+  ord <- map(f, "r2") %>%
+    unlist() %>%
+    order(decreasing = TRUE)
 
   r <- list(fitted = data.frame(
     r = map(f[ord], "r") %>% unlist(),
@@ -41,6 +42,5 @@ fit_models <- function(y, time) {
   class(r) <- "fit_models"
 
   return(r)
-
+  ## retornar os previstos dos melhor modelos ou de todos os modelos
 }
-
