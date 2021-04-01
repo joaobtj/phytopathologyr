@@ -11,7 +11,6 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
-#' @importFrom dplyr summarise
 #'
 #' @examples
 #' time <- dap <- seq(10, 60, 10)
@@ -20,13 +19,14 @@
 #' fit
 #' @export
 fit_models <- function(y, time) {
-  f <- data.frame(y, time) %>% summarise(
+  f <- list(
     linear = lin(y, time),
     exponential = expon(y, time),
     monomolecular = monom(y, time),
     logistic = logist(y, time),
     gompertz = gomp(y, time)
   )
+
 
   # order of models by highest r2
   ord <- map(f, "r2") %>%

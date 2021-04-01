@@ -28,5 +28,5 @@ Fit Logistic model
 \examples{
 dap <- seq(1, 70, 10)
 inc <- c(0.01, 0.04, 0.15, 0.31, 0.65, 0.88, 0.94)
-logist(y=inc, time=dap)
+logist(y = inc, time = dap)
 }

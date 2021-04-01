@@ -28,5 +28,5 @@ Fit monomolecular model
 \examples{
 dap <- seq(10, 60, 10)
 inc <- c(0.18, 0.56, 0.82, 0.91, 0.96, 0.98)
-monom(y = inc , time = dap)
+monom(y = inc, time = dap)
 }

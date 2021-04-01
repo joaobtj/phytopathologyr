@@ -28,5 +28,5 @@ Fit Gompertz model
 \examples{
 dap <- seq(1, 70, 10)
 inc <- c(0.01, 0.14, 0.40, 0.65, 0.88, 0.96, 0.98)
-gomp(y=inc, time=dap)
+gomp(y = inc, time = dap)
 }

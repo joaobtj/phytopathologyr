@@ -28,5 +28,5 @@ Fit Exponential model
 \examples{
 dap <- seq(1, 70, 10)
 inc <- c(0.01, 0.04, 0.05, 0.11, 0.30, 0.55, 0.94)
-expon(y=inc, time=dap)
+expon(y = inc, time = dap)
 }

@@ -28,5 +28,5 @@ Fit linear model
 \examples{
 dap <- seq(10, 60, 10)
 inc <- c(0.18, 0.30, 0.40, 0.60, 0.90, 0.98)
-lin(y = inc , time = dap)
+lin(y = inc, time = dap)
 }
