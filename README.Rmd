@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # phytopathologyr
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/joaobtj/phytopathologyr/workflows/R-CMD-check/badge.svg)](https://github.com/joaobtj/phytopathologyr/actions)
 <!-- badges: end -->
 
 The goal of phytopathologyr is to bring more common functions in phytopathology analysis.
