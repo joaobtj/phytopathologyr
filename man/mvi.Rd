@@ -19,7 +19,7 @@ MVI
 }
 \examples{
 day <- seq(10, 60, 10)
-sev <- c(0.22, 0.26, 0.28, 0.36, 0.39, 0.42)
-plot(sev~day)
+sev <- c(0.22, NA, 0.28, 0.36, 0.39, 0.42)
+plot(sev ~ day)
 mvi(y = sev, time = day)
 }
